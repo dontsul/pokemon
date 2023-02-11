@@ -1,0 +1,6 @@
+.page-item:first-child {
+    margin-right: 1.5rem;
+}
+.page-item:last-child {
+    margin-left: 1.5rem;
+}

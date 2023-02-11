@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.card {
+    margin: 10px;
+}
+.card:hover {
+    transform: scale(1.03);
+    transition: 250ms;
+    cursor: pointer;
+}
+.wrap-img {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    align-items: center;
+}
+
+.img-pokemon {
+    width: 150px;
+    height: 170px;
+}
+
+.card-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
+}

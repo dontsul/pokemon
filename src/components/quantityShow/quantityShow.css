@@ -1,0 +1,14 @@
+.wrapper-select {
+    display: flex;
+    align-items: center;
+    margin: 40px 0;
+}
+
+.wrapper-select span {
+    margin-right: 20px;
+    font-size: 22px;
+}
+
+.wrapper-select select {
+    width: 75px;
+}
