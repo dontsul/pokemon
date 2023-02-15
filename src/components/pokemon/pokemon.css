@@ -3,7 +3,7 @@
 .card {
     margin: 10px;
 }
-.card:hover {
+.card-home:hover {
     transform: scale(1.03);
     transition: 250ms;
     cursor: pointer;

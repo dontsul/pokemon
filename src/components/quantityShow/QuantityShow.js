@@ -1,16 +1,20 @@
 import './quantityShow.css';
 
-const QuantityShow = ({ quantityShowPoke, changeQuantityShowPoke }) => {
+const QuantityShow = ({
+    pokemonsPerPage,
+    changeQuantityShowPoke,
+    setCurrentPage,
+    pokemonsData,
+}) => {
     return (
         <div className="container wrapper-select">
             <span>Show pokemons </span>
             <select
                 onChange={(e) => {
-                    // console.log(e.target.value);
                     changeQuantityShowPoke(e.target.value);
-                    console.log(quantityShowPoke);
+                    setCurrentPage(pokemonsData.length / e.target.value);
                 }}
-                value={quantityShowPoke}
+                value={pokemonsPerPage}
                 className="form-select status"
                 aria-label="Default select example"
             >

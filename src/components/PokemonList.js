@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Pokemon from './pokemon/Pokemon';
 
-function PokemonList({ pokemonsData }) {
+function PokemonList({ currentsPokemon }) {
     return (
         <div className=" d-flex flex-row justify-content-center align-items-center flex-wrap">
-            {pokemonsData.map((pokemon) => {
+            {currentsPokemon.map((pokemon) => {
                 return <Pokemon key={pokemon.id} pokemon={pokemon} />;
             })}
         </div>
