@@ -14,6 +14,7 @@ const CardPage = ({ pokemonsData, currentPage, setCurrentPage }) => {
         if (pok.name === location.pathname.slice(9)) {
             return true;
         }
+        return true;
     });
 
     useEffect(() => {
@@ -24,7 +25,7 @@ const CardPage = ({ pokemonsData, currentPage, setCurrentPage }) => {
                     setPokemonInfo(data);
                 });
         }
-    }, []);
+    }, [filteredName.length, location.pathname]);
     if (filteredName.length === 0) {
         return (
             <>

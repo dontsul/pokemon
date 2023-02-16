@@ -6,9 +6,7 @@ import Spinner from '../Spinner';
 import QuantityShow from '../quantityShow/QuantityShow';
 
 const HomePage = ({ pokemonsData, setPokemonsData, currentPage, setCurrentPage }) => {
-    const [urlCurrent, setUrlCurrent] = useState(
-        `https://pokeapi.co/api/v2/pokemon?limit=500&offset=0`
-    );
+    const [urlCurrent] = useState(`https://pokeapi.co/api/v2/pokemon?limit=500&offset=0`);
     const [inputValue, setInputValue] = useState('');
     const [loading, setLoading] = useState(false);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(20);
@@ -48,7 +46,7 @@ const HomePage = ({ pokemonsData, setPokemonsData, currentPage, setCurrentPage }
                 }
             });
         }
-    }, [urlCurrent]);
+    }, [urlCurrent, pokemonsData.length, setPokemonsData]);
 
     const lastPokemonIndex = currentPage * pokemonsPerPage;
     const firstPokemonIndex = lastPokemonIndex - pokemonsPerPage;
@@ -67,13 +65,15 @@ const HomePage = ({ pokemonsData, setPokemonsData, currentPage, setCurrentPage }
     return (
         <>
             <div className="container">
-                <FilterName filteredPokemons={filteredPokemons} setInputValue={setInputValue} />
+                <FilterName
+                    filteredPokemons={filteredPokemons}
+                    setInputValue={setInputValue}
+                    setCurrentPage={setCurrentPage}
+                />
                 <QuantityShow
                     changeQuantityShowPoke={changeQuantityShowPoke}
                     pokemonsPerPage={pokemonsPerPage}
                     setCurrentPage={setCurrentPage}
-                    currentPage={currentPage}
-                    paginationLength={paginationLength}
                     pokemonsData={pokemonsData}
                 />
             </div>
