@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import Pokemon from './pokemon/Pokemon';
 
 function PokemonList({ currentsPokemon }) {

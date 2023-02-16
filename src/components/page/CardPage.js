@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Spinner from '../Spinner';
 import NotFoud from './NotFound';
+import { RiArrowGoBackFill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
-const CardPage = ({ pokemonsData }) => {
+const CardPage = ({ pokemonsData, currentPage, setCurrentPage }) => {
     const [pokemonInfo, setPokemonInfo] = useState('');
     const linkPokemon = 'https://pokeapi.co/api/v2/pokemon';
     const location = useLocation();
+    const page = currentPage;
 
     let filteredName = pokemonsData.filter((pok) => {
         if (pok.name === location.pathname.slice(1)) {
@@ -30,11 +33,20 @@ const CardPage = ({ pokemonsData }) => {
             </>
         );
     }
-    return <>{!pokemonInfo ? <Spinner /> : <View pokemonInfo={pokemonInfo} />}</>;
+    return (
+        <>
+            {!pokemonInfo ? (
+                <Spinner />
+            ) : (
+                <View pokemonInfo={pokemonInfo} setCurrentPage={setCurrentPage} page={page} />
+            )}
+        </>
+    );
 };
 export default CardPage;
 
 const View = (props) => {
+    const { setCurrentPage, page } = props;
     const { name, sprites, types, weight, height, stats } = props.pokemonInfo;
 
     return (
@@ -43,12 +55,15 @@ const View = (props) => {
                 className="card d-flex justify-content-around align-items-center flex-row"
                 style={{ width: '50rem', padding: '40px' }}
             >
-                <div className="d-flex justify-content-center align-items-center p-30">
+                <div
+                    style={{ width: '350px', heigth: '350px' }}
+                    className="d-flex justify-content-center align-items-center p-30"
+                >
                     <img
                         src={sprites.other.dream_world.front_default}
                         className="card-img-top"
                         alt="pokemon"
-                        style={{ width: '250px', heigth: '250px' }}
+                        style={{ maxWidth: '350px', maxHeigth: '350px' }}
                     />
                 </div>
                 <div>
@@ -64,6 +79,18 @@ const View = (props) => {
                         <li className="list-group-item">Defence: {stats[2].base_stat}</li>
                     </ul>
                 </div>
+                <Link
+                    title="Go back"
+                    to="/"
+                    onClick={setCurrentPage(page)}
+                    style={{
+                        position: 'absolute',
+                        top: '20px',
+                        right: '20px',
+                    }}
+                >
+                    <RiArrowGoBackFill />
+                </Link>
             </div>
         </div>
     );

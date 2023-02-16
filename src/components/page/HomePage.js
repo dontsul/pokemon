@@ -5,14 +5,12 @@ import PokemonList from '../PokemonList';
 import Spinner from '../Spinner';
 import QuantityShow from '../quantityShow/QuantityShow';
 
-const HomePage = ({ pokemonsData, setPokemonsData }) => {
+const HomePage = ({ pokemonsData, setPokemonsData, currentPage, setCurrentPage }) => {
     const [urlCurrent, setUrlCurrent] = useState(
-        `https://pokeapi.co/api/v2/pokemon?limit=100&offset=0`
+        `https://pokeapi.co/api/v2/pokemon?limit=600&offset=0`
     );
-    // const [pokemonsData, setPokemonsData] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(20);
 
     const filteredPokemons = (value) => {
@@ -23,31 +21,33 @@ const HomePage = ({ pokemonsData, setPokemonsData }) => {
         return newPokemons;
     };
 
-    async function getPokemonsList(url) {
-        const res = await fetch(url);
-        const data = await res.json();
-        getPokemonsData(data.results);
-        console.log('getPokemonsList');
-    }
-
-    async function getPokemonsData(res) {
-        setLoading(false);
-        setPokemonsData([]);
-        res.map(async (item) => {
-            try {
-                const res = await fetch(item.url);
-                const data = await res.json();
-                setPokemonsData((state) => [...state, data]);
-                setLoading(true);
-            } catch (err) {
-                console.log(err);
-            }
-        });
-    }
-
     useEffect(() => {
-        getPokemonsList(urlCurrent);
-        console.log('use effect');
+        if (pokemonsData.length === 0) {
+            getPokemonsList(urlCurrent);
+        } else {
+            setLoading(true);
+        }
+
+        async function getPokemonsList(url) {
+            const res = await fetch(url);
+            const data = await res.json();
+            getPokemonsData(data.results);
+        }
+
+        async function getPokemonsData(res) {
+            setLoading(false);
+            setPokemonsData([]);
+            res.map(async (item) => {
+                try {
+                    const res = await fetch(item.url);
+                    const data = await res.json();
+                    setPokemonsData((state) => [...state, data]);
+                    setLoading(true);
+                } catch (err) {
+                    console.log(err);
+                }
+            });
+        }
     }, [urlCurrent]);
 
     const lastPokemonIndex = currentPage * pokemonsPerPage;
@@ -64,9 +64,6 @@ const HomePage = ({ pokemonsData, setPokemonsData }) => {
     }
 
     const paginationLength = Math.ceil(filteredPokemons(inputValue).length / pokemonsPerPage);
-
-    console.log('render...');
-
     return (
         <>
             <div className="container">
@@ -100,6 +97,7 @@ const HomePage = ({ pokemonsData, setPokemonsData }) => {
                     nextClassName={'page-item'}
                     nextLinkClassName={'page-link'}
                     breakLinkClassName={'page-link'}
+                    initialPage={currentPage - 1}
                     activeClassName={'active'}
                 />
             </nav>

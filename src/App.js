@@ -7,6 +7,7 @@ import NotFoud from './components/page/NotFound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
     const [pokemonsData, setPokemonsData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
     return (
         <BrowserRouter>
             <div className="App">
@@ -18,10 +19,21 @@ function App() {
                                 <HomePage
                                     pokemonsData={pokemonsData}
                                     setPokemonsData={setPokemonsData}
+                                    currentPage={currentPage}
+                                    setCurrentPage={setCurrentPage}
                                 />
                             }
                         />
-                        <Route path="/:name" element={<CardPage pokemonsData={pokemonsData} />} />
+                        <Route
+                            path="/:name"
+                            element={
+                                <CardPage
+                                    pokemonsData={pokemonsData}
+                                    currentPage={currentPage}
+                                    setCurrentPage={setCurrentPage}
+                                />
+                            }
+                        />
                         <Route path="*" element={<NotFoud />} />
                     </Route>
                 </Routes>

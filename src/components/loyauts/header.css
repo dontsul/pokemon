@@ -3,12 +3,29 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 .wrap-logo {
     max-width: 130px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .logo {
     max-width: 100%;
     display: block;
+}
+.link-repo {
+    color: rgb(216, 212, 3);
+    font-weight: 600;
+    font-size: 28px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cont {
+    max-height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
