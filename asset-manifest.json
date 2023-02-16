@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/dontsul.github.io/pokemon/static/css/main.6b6ba1c7.css",
+    "main.js": "/dontsul.github.io/pokemon/static/js/main.7a6582d1.js",
+    "static/media/Pokemon.png": "/dontsul.github.io/pokemon/static/media/Pokemon.6893b8c02338e8427310.png",
+    "index.html": "/dontsul.github.io/pokemon/index.html",
+    "main.6b6ba1c7.css.map": "/dontsul.github.io/pokemon/static/css/main.6b6ba1c7.css.map",
+    "main.7a6582d1.js.map": "/dontsul.github.io/pokemon/static/js/main.7a6582d1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6b6ba1c7.css",
+    "static/js/main.7a6582d1.js"
+  ]
+}
