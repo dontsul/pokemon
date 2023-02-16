@@ -12,7 +12,7 @@ function App() {
         <BrowserRouter>
             <div className="App">
                 <Routes>
-                    <Route path="/" element={<Header />}>
+                    <Route path="/pokemon" element={<Header />}>
                         <Route
                             index
                             element={
@@ -25,7 +25,7 @@ function App() {
                             }
                         />
                         <Route
-                            path="/:name"
+                            path="/pokemon:name"
                             element={
                                 <CardPage
                                     pokemonsData={pokemonsData}

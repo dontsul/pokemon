@@ -10,16 +10,15 @@ const CardPage = ({ pokemonsData, currentPage, setCurrentPage }) => {
     const linkPokemon = 'https://pokeapi.co/api/v2/pokemon';
     const location = useLocation();
     const page = currentPage;
-
     let filteredName = pokemonsData.filter((pok) => {
-        if (pok.name === location.pathname.slice(1)) {
+        if (pok.name === location.pathname.slice(9)) {
             return true;
         }
     });
 
     useEffect(() => {
         if (filteredName.length > 0) {
-            fetch(`${linkPokemon}${location.pathname}`)
+            fetch(`${linkPokemon}${location.pathname.slice(8)}`)
                 .then((res) => res.json())
                 .then((data) => {
                     setPokemonInfo(data);
@@ -81,7 +80,7 @@ const View = (props) => {
                 </div>
                 <Link
                     title="Go back"
-                    to="/"
+                    to="/pokemon"
                     onClick={setCurrentPage(page)}
                     style={{
                         position: 'absolute',

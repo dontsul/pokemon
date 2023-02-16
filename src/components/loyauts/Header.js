@@ -8,7 +8,7 @@ const Header = () => {
             <nav className="bg-body-tertiary ">
                 <div className=" container cont ">
                     <div className=" wrap-logo">
-                        <Link to=".">
+                        <Link to="/pokemon">
                             <img className="logo" src={pokemon} alt="logo" />
                         </Link>
                     </div>
