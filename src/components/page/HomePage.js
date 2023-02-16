@@ -7,7 +7,7 @@ import QuantityShow from '../quantityShow/QuantityShow';
 
 const HomePage = ({ pokemonsData, setPokemonsData, currentPage, setCurrentPage }) => {
     const [urlCurrent, setUrlCurrent] = useState(
-        `https://pokeapi.co/api/v2/pokemon?limit=50&offset=0`
+        `https://pokeapi.co/api/v2/pokemon?limit=500&offset=0`
     );
     const [inputValue, setInputValue] = useState('');
     const [loading, setLoading] = useState(false);
