@@ -26,13 +26,7 @@ function App() {
                         />
                         <Route
                             path="/pokemon:name"
-                            element={
-                                <CardPage
-                                    pokemonsData={pokemonsData}
-                                    currentPage={currentPage}
-                                    setCurrentPage={setCurrentPage}
-                                />
-                            }
+                            element={<CardPage pokemonsData={pokemonsData} />}
                         />
                         <Route path="*" element={<NotFoud />} />
                     </Route>

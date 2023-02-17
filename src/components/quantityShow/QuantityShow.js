@@ -12,7 +12,8 @@ const QuantityShow = ({
             <select
                 onChange={(e) => {
                     changeQuantityShowPoke(e.target.value);
-                    setCurrentPage(pokemonsData.length / e.target.value);
+                    // setCurrentPage(pokemonsData.length / e.target.value);
+                    setCurrentPage(1);
                 }}
                 value={pokemonsPerPage}
                 className="form-select status"

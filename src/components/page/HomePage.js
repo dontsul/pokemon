@@ -27,9 +27,13 @@ const HomePage = ({ pokemonsData, setPokemonsData, currentPage, setCurrentPage }
         }
 
         async function getPokemonsList(url) {
-            const res = await fetch(url);
-            const data = await res.json();
-            getPokemonsData(data.results);
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                getPokemonsData(data.results);
+            } catch (err) {
+                console.log(err);
+            }
         }
 
         async function getPokemonsData(res) {

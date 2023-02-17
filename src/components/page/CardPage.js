@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Spinner from '../Spinner';
 import NotFoud from './NotFound';
 import { RiArrowGoBackFill } from 'react-icons/ri';
@@ -7,46 +7,33 @@ import { Link } from 'react-router-dom';
 
 const CardPage = ({ pokemonsData, currentPage, setCurrentPage }) => {
     const [pokemonInfo, setPokemonInfo] = useState('');
-    const linkPokemon = 'https://pokeapi.co/api/v2/pokemon';
-    const location = useLocation();
-    const page = currentPage;
-    let filteredName = pokemonsData.filter((pok) => {
-        if (pok.name === location.pathname.slice(9)) {
-            return true;
-        }
-        return true;
-    });
+    const linkPokemon = 'https://pokeapi.co/api/v2/pokemon/';
+    const params = useParams();
+    const navigate = useNavigate();
+    const filteredPok = pokemonsData.filter((elem) => elem.name === params.name);
 
     useEffect(() => {
-        if (filteredName.length > 0) {
-            fetch(`${linkPokemon}${location.pathname.slice(8)}`)
+        if (filteredPok.length !== 0) {
+            fetch(`${linkPokemon}${params.name}`)
                 .then((res) => res.json())
                 .then((data) => {
                     setPokemonInfo(data);
-                });
+                })
+                .catch((err) => console.log(err));
         }
-    }, [filteredName.length, location.pathname]);
-    if (filteredName.length === 0) {
-        return (
-            <>
-                <NotFoud />
-            </>
-        );
+    }, []);
+
+    if (filteredPok.length === 0) {
+        return <NotFoud />;
     }
     return (
-        <>
-            {!pokemonInfo ? (
-                <Spinner />
-            ) : (
-                <View pokemonInfo={pokemonInfo} setCurrentPage={setCurrentPage} page={page} />
-            )}
-        </>
+        <>{!pokemonInfo ? <Spinner /> : <View pokemonInfo={pokemonInfo} navigate={navigate} />}</>
     );
 };
 export default CardPage;
 
 const View = (props) => {
-    const { setCurrentPage, page } = props;
+    const { navigate } = props;
     const { name, sprites, types, weight, height, stats } = props.pokemonInfo;
 
     return (
@@ -82,7 +69,9 @@ const View = (props) => {
                 <Link
                     title="Go back"
                     to="/pokemon"
-                    onClick={setCurrentPage(page)}
+                    onClick={() => {
+                        navigate('..', { relative: 'path' });
+                    }}
                     style={{
                         position: 'absolute',
                         top: '20px',
