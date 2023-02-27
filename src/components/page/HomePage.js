@@ -6,7 +6,7 @@ import Spinner from '../Spinner';
 import QuantityShow from '../quantityShow/QuantityShow';
 
 const HomePage = ({ pokemonsData, setPokemonsData, currentPage, setCurrentPage }) => {
-    const [urlCurrent] = useState(`https://pokeapi.co/api/v2/pokemon?limit=500&offset=0`);
+    const [urlCurrent] = useState(`https://pokeapi.co/api/v2/pokemon?limit=200&offset=0`);
     const [inputValue, setInputValue] = useState('');
     const [loading, setLoading] = useState(false);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(20);

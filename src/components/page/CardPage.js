@@ -5,7 +5,7 @@ import NotFoud from './NotFound';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
-const CardPage = ({ pokemonsData, currentPage, setCurrentPage }) => {
+const CardPage = ({ pokemonsData }) => {
     const [pokemonInfo, setPokemonInfo] = useState('');
     const linkPokemon = 'https://pokeapi.co/api/v2/pokemon/';
     const params = useParams();
@@ -13,14 +13,12 @@ const CardPage = ({ pokemonsData, currentPage, setCurrentPage }) => {
     const filteredPok = pokemonsData.filter((elem) => elem.name === params.name);
 
     useEffect(() => {
-        if (filteredPok.length !== 0) {
-            fetch(`${linkPokemon}${params.name}`)
-                .then((res) => res.json())
-                .then((data) => {
-                    setPokemonInfo(data);
-                })
-                .catch((err) => console.log(err));
-        }
+        fetch(`${linkPokemon}${params.name}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setPokemonInfo(data);
+            })
+            .catch((err) => console.log(err));
     }, []);
 
     if (filteredPok.length === 0) {
@@ -78,7 +76,7 @@ const View = (props) => {
                         right: '20px',
                     }}
                 >
-                    <RiArrowGoBackFill />
+                    <RiArrowGoBackFill style={{ fontSize: '28px' }} />
                 </Link>
             </div>
         </div>
